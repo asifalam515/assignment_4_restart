@@ -4,21 +4,18 @@ function monthlySavings(arr, livingCost) {
   }
 
   var totalPayment = 0;
+  var totalTax = 0;
   for (var i = 0; i < arr.length; i++) {
     totalPayment += arr[i];
+    if (arr[i] >= 3000) {
+      totalTax += arr[i] * 0.2;
+    }
   }
 
-  if (totalPayment >= 3000) {
-    totalPayment -= totalPayment * 0.2;
-  }
-
-  var savings = totalPayment - livingCost;
-  if (savings >= 0) {
-    return savings;
-  } else {
-    return "earn more";
-  }
+  var income = totalPayment - totalTax;
+  var savings = income - livingCost;
+  return savings >= 0 ? savings : "earn more";
 }
 
-var answer = monthlySavings([1000, 2000, 2500], 5000);
+var answer = monthlySavings([900, 2700, 3400], 10000);
 console.log(answer);
